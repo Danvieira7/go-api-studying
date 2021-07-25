@@ -1,5 +1,0 @@
-- separar funções do arquivo main
-- função listar
-- função pegar 1
-- função deletar
-- função editar

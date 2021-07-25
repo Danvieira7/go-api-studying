@@ -8,13 +8,17 @@ import (
 )
 
 func Index(ctx *web.Context) string {
+	// Figure out how to set this line once to be reusable.
 	ctx.SetHeader("Content-Type", "application/json", true)
 
 	var users []User
-
+	
+	// Turn this db variable into a dependency injection.
 	db := database.GetDB()
 	db.Find(&users)
 
+	// Figure out if we can turn this into reusable pattern return for Json OBJ.
+	// Handle error. 
 	bytes, _ := json.Marshal(users)
 
 	return string(bytes)
@@ -33,7 +37,8 @@ func Get(ctx *web.Context, id string) string {
 	return string(bytes)
 }
 
-func Create(ctx *web.Context) string {
+// Validate required fields and type of fields (all persistency methods).
+func Create(ctx *web.Context) string {	
 	ctx.SetHeader("Content-Type", "application/json", true)
 
 	user := &User{}

@@ -2,8 +2,8 @@ package users
 
 import (
 	"encoding/json"
-	"github.com/hoisie/web"
 	"github.com/Danvieira7/go-api-studying/database"
+	"github.com/hoisie/web"
 )
 
 var userJackMocked = map[string]string{
@@ -14,14 +14,12 @@ var userJackMocked = map[string]string{
 func Index (ctx *web.Context) string {
 	ctx.SetHeader("Content-Type", "application/json", true)
 
-	collectionResult := []map[string]string{
-		userJackMocked,
-		userJackMocked,
-		userJackMocked,
-		userJackMocked,
-	}
+	var users []User
 
-	bytes, _ := json.Marshal(collectionResult)
+	db := database.GetDB()
+	db.Find(&users)
+
+	bytes, _ := json.Marshal(users)
 
 	return string(bytes)
 }
@@ -29,7 +27,12 @@ func Index (ctx *web.Context) string {
 func Get (ctx *web.Context, id string) string {
 	ctx.SetHeader("Content-Type", "application/json", true)
 
-	bytes, _ := json.Marshal(userJackMocked)
+	var user User
+
+	db := database.GetDB()
+	db.Find(&user, id)
+
+	bytes, _ := json.Marshal(user)
 
 	return string(bytes)
 }

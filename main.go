@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/hoisie/web"
-	"github.com/soufraz/go-api-study/database"
-	"github.com/soufraz/go-api-study/users"
 	"gorm.io/gorm"
+
+	"github.com/Danvieira7/go-api-studying/database"
+	"github.com/Danvieira7/go-api-studying/users"
 )
 
 func migrate(db *gorm.DB) *gorm.DB {
@@ -16,7 +17,7 @@ func migrate(db *gorm.DB) *gorm.DB {
 	return db
 }
 
-func main () {
+func main() {
 	migrate(database.GetDB())
 
 	web.Get("/users", users.Index)

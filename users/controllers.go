@@ -3,7 +3,7 @@ package users
 import (
 	"encoding/json"
 	"github.com/hoisie/web"
-	"github.com/soufraz/go-api-study/database"
+	"github.com/Danvieira7/go-api-studying/database"
 )
 
 var userJackMocked = map[string]string{

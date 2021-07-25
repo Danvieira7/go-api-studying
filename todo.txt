@@ -1,0 +1,13 @@
+- instalar um driver sqlite
+- instalar um query language sqlite
+- separar funções do arquivo main
+- função listar
+- função pegar 1
+- função add (mocked)
+- função add
+- função deletar
+- função editar
+
+
+código para conectar no sqlite
+//db, _ := gorm.Open(sqlite.Open("test_database.db"), &gorm.Config{})

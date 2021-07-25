@@ -6,11 +6,6 @@ import (
 	"github.com/hoisie/web"
 )
 
-var userJackMocked = map[string]string{
-	"name": "Jack",
-	"age": "24",
-}
-
 func Index (ctx *web.Context) string {
 	ctx.SetHeader("Content-Type", "application/json", true)
 
@@ -39,13 +34,26 @@ func Get (ctx *web.Context, id string) string {
 
 func Create (ctx *web.Context) string {
 	ctx.SetHeader("Content-Type", "application/json", true)
-
+	
 	user := &User{}
 	json.NewDecoder(ctx.Request.Body).Decode(&user)
-
+	
 	db := database.GetDB()
 	db.Create(user)
-
+	
 	bytes, _ := json.Marshal(user)
+	return string(bytes)
+}
+
+func Delete (ctx *web.Context, id string) string {
+	ctx.SetHeader("Content-Type", "application/json", true)
+
+	db := database.GetDB()
+	db.Delete(&User{}, id)
+
+	result :=  map[string]string {"msg": "User successfully deleted."}
+
+	bytes, _ := json.Marshal(result)
+
 	return string(bytes)
 }

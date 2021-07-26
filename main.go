@@ -8,9 +8,9 @@ import (
 	"github.com/Danvieira7/go-api-studying/users"
 )
 
-// Find out how to run this block form the DB package  
-// if we move migrate to database package and try calling it here
-// we get a circular dependency error.
+// Find out how to move this migrate method to the database package.  
+// If we move this migrate method to database package and try 
+// calling it here we get a circular dependency error.
 func migrate(db *gorm.DB) *gorm.DB {
 	err := db.AutoMigrate(&users.User{})
 	if err != nil {
